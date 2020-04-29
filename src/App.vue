@@ -4,19 +4,18 @@
       <Header/>
     </el-header>
     <el-main>
-      <Main/>
+      <router-view/>
     </el-main>
   </el-container>
 </template>
 
 <script>
   import Header from './components/Header'
-  import Main from './components/Main'
+
   export default {
     name: 'app',
     components: {
-      Header,
-      Main
+      Header
     }
   }
 </script>

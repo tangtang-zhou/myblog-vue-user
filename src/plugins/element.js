@@ -12,10 +12,14 @@ import {
   Container,
   Carousel,
   CarouselItem,
-  Image
+  Image,
+  Card,
+  Aside
 } from 'element-ui'
 
 Vue.use(Button)
+Vue.use(Card)
+Vue.use(Aside)
 Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Submenu)
