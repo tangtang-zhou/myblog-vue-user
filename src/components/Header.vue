@@ -2,8 +2,8 @@
   <div class="header-box">
     <div class="el-col-3">汤州的博客网站</div>
     <div class="el-col-10">
-      <el-menu mode="horizontal">
-        <el-menu-item index="1">首页</el-menu-item>
+      <el-menu mode="horizontal" :router="true">
+        <el-menu-item :index="'/main'">首页</el-menu-item>
         <el-submenu index="2">
           <template slot="title">博客分类</template>
           <el-menu-item index="2-1">选项1</el-menu-item>
@@ -18,17 +18,34 @@
       <el-button type="primary" icon="el-icon-search">搜索</el-button>
     </div>
     <div class="el-col-3">
-      <el-button icon="el-icon-user" v-if="user"></el-button>
-      <el-button v-else>登录/注册</el-button>
+      <el-dropdown v-if="user">
+        <el-button type="primary">
+          我的<i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item><el-button type="text">个人中心</el-button></el-dropdown-item>
+          <el-dropdown-item><el-button type="text" @click="logout">退出</el-button></el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <el-button v-else><router-link to="/login">登录/注册</router-link></el-button>
     </div>
   </div>
 </template>
 
 <script>
   export default {
+    inject: ['reload'],
     data () {
       return {
-        user: window.sessionStorage.getItem('user')
+        user: window.sessionStorage.getItem('token')
+      }
+    },
+    methods: {
+      logout () {
+        console.log('d')
+        window.sessionStorage.clear()
+        this.reload()
+        this.$router.push('/login')
       }
     }
   }
@@ -58,5 +75,9 @@
   }
   .el-input{
     width: 75%;
+  }
+  a{
+    text-decoration:none;
+    color: #333
   }
 </style>

@@ -14,10 +14,19 @@ import {
   CarouselItem,
   Image,
   Card,
-  Aside
+  Aside,
+  Link,
+  Message,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu
 } from 'element-ui'
 
+Vue.use(Dropdown)
+Vue.use(DropdownItem)
+Vue.use(DropdownMenu)
 Vue.use(Button)
+Vue.use(Link)
 Vue.use(Card)
 Vue.use(Aside)
 Vue.use(Menu)
@@ -34,3 +43,4 @@ Vue.use(Container)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
 Vue.use(Image)
+Vue.prototype.$message = Message

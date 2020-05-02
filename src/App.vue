@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <Header/>
+      <Header v-if="alive"/>
     </el-header>
     <el-main>
       <router-view/>
@@ -14,6 +14,24 @@
 
   export default {
     name: 'app',
+    provide () {
+      return {
+        reload: this.reload
+      }
+    },
+    data () {
+      return {
+        alive: true
+      }
+    },
+    methods: {
+      reload () {
+        this.alive = false
+        this.$nextTick(() => {
+          this.alive = true
+        })
+      }
+    },
     components: {
       Header
     }
