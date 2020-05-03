@@ -5,6 +5,10 @@ import Detail from '../components/detail/Detail'
 import Login from '../components/login/Login'
 import LoginC from '../components/login/LoginC'
 import Register from '../components/login/Register'
+import Setting from '../components/setting/Setting'
+import Personal from '../components/setting/Personal'
+import Password from '../components/setting/Password'
+import Markdown from '../components/markdown/Markdown'
 
 Vue.use(VueRouter)
 
@@ -22,6 +26,10 @@ const routes = [
     component: Detail
   },
   {
+    path: '/markdown',
+    component: Markdown
+  },
+  {
     path: '/login',
     component: Login,
     children: [
@@ -36,6 +44,24 @@ const routes = [
       {
         path: '/',
         component: LoginC
+      }
+    ]
+  },
+  {
+    path: '/setting',
+    component: Setting,
+    children: [
+      {
+        path: '/personal',
+        component: Personal
+      },
+      {
+        path: '/password',
+        component: Password
+      },
+      {
+        path: '/',
+        component: Personal
       }
     ]
   }

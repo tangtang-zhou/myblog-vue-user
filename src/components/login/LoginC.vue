@@ -4,7 +4,7 @@
       <el-input placeholder="手机号或邮箱" prefix-icon="el-icon-user" v-model="loginForm.phone"></el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input placeholder="密码" show-password prefix-icon="el-icon-lock" v-model="loginForm.password"></el-input>
+      <el-input placeholder="密码" show-password prefix-icon="el-icon-lock" v-model="loginForm.password" @keyup.enter.native="login"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="login">登录</el-button>
@@ -27,7 +27,7 @@
               required: true, message: '请输入用户名', trigger: 'blur'
             },
             {
-              min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur'
+              min: 3, max: 11, message: '长度在 4 到 11 个字符', trigger: 'blur'
             }
           ],
           password: [

@@ -10,7 +10,7 @@
           <el-menu-item index="2-2">选项2</el-menu-item>
           <el-menu-item index="2-3">选项3</el-menu-item>
         </el-submenu>
-        <el-menu-item index="3">写博客</el-menu-item>
+        <el-menu-item :index="'/markdown'">写博客</el-menu-item>
       </el-menu>
     </div>
     <div class="el-col-8">
@@ -23,8 +23,8 @@
           我的<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item><el-button type="text">个人中心</el-button></el-dropdown-item>
-          <el-dropdown-item><el-button type="text" @click="logout">退出</el-button></el-dropdown-item>
+          <el-dropdown-item><el-button type="text"><router-link to="/setting">个人中心</router-link></el-button></el-dropdown-item>
+          <el-dropdown-item><el-button type="text" @click="logout"><el-link>退出</el-link></el-button></el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <el-button v-else><router-link to="/login">登录/注册</router-link></el-button>
@@ -42,7 +42,6 @@
     },
     methods: {
       logout () {
-        console.log('d')
         window.sessionStorage.clear()
         this.reload()
         this.$router.push('/login')

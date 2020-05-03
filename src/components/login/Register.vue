@@ -10,49 +10,65 @@
       <el-input type="password" placeholder="请确认密码" v-model="registerForm.password2"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary">提交</el-button>
+      <el-button type="primary" @click="register">提交</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
   export default {
-  data () {
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
-      } else {
-        if (this.registerForm.password2 !== '') {
-          this.$refs.ruleForm.validateField('password2')
+    data () {
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'))
+        } else {
+          if (this.registerForm.password2 !== '') {
+            this.$refs.ruleForm.validateField('password2')
+          }
+          callback()
         }
-        callback()
+      }
+      var validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'))
+        } else if (value !== this.registerForm.password1) {
+          callback(new Error('两次输入密码不一致!'))
+        } else {
+          callback()
+        }
+      }
+      return {
+        registerForm: {
+          phone: '',
+          password2: '',
+          password1: ''
+        },
+        rules: {
+          pass: [
+            { validator: validatePass, trigger: 'blur' }
+          ],
+          password2: [
+            { validator: validatePass2, trigger: 'blur' }
+          ]
+        }
+      }
+    },
+    methods: {
+      register () {
+        this.$refs.ruleForm.validate(async validate => {
+          if (!validate) return
+          const { data: res } = await this.$http.get('/api/register', {
+            params: {
+              phone: this.registerForm.phone,
+              password: this.registerForm.password2
+            }
+          })
+          console.log(res)
+          this.$message.success('注册成功，请登录')
+          this.$router.push('/login')// 编程式导航
+        })
       }
     }
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'))
-      } else if (value !== this.registerForm.password1) {
-        callback(new Error('两次输入密码不一致!'))
-      } else {
-        callback()
-      }
-    }
-    return {
-      registerForm: {
-        phone: '',
-        password2: '',
-        password1: ''
-      },
-      rules: {
-        pass: [
-          { validator: validatePass, trigger: 'blur' }
-        ],
-        password2: [
-          { validator: validatePass2, trigger: 'blur' }
-        ]
-      }
-    }
-  }
   }
 </script>
 

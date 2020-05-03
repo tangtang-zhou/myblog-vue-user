@@ -19,9 +19,15 @@ import {
   Message,
   Dropdown,
   DropdownItem,
-  DropdownMenu
+  DropdownMenu,
+  Radio,
+  RadioGroup,
+  DatePicker
 } from 'element-ui'
 
+Vue.use(DatePicker)
+Vue.use(RadioGroup)
+Vue.use(Radio)
 Vue.use(Dropdown)
 Vue.use(DropdownItem)
 Vue.use(DropdownMenu)
