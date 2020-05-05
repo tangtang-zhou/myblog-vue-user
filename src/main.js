@@ -4,8 +4,11 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import './assets/css/global.css'
-
 import axios from 'axios'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+// use
+Vue.use(mavonEditor)
 
 axios.interceptors.request.use(config => {
   config.headers.token = window.sessionStorage.getItem('token')
