@@ -22,9 +22,13 @@ import {
   DropdownMenu,
   Radio,
   RadioGroup,
-  DatePicker
+  DatePicker,
+  Dialog,
+  Tag
 } from 'element-ui'
 
+Vue.use(Tag)
+Vue.use(Dialog)
 Vue.use(DatePicker)
 Vue.use(RadioGroup)
 Vue.use(Radio)

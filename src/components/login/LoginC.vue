@@ -48,7 +48,7 @@
           const { data: res } = await this.$http.post('/api/login', this.loginForm)
           console.log(res)
           this.$message.success('登录成功')
-          window.sessionStorage.setItem('user', res)
+          window.sessionStorage.setItem('userId', res.userId)
           window.sessionStorage.setItem('token', res.token) // 保存token
           this.reload()
           this.$router.push('/main')// 编程式导航
