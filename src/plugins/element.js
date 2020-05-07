@@ -24,9 +24,13 @@ import {
   RadioGroup,
   DatePicker,
   Dialog,
-  Tag
+  Tag,
+  Select,
+  Option
 } from 'element-ui'
 
+Vue.use(Option)
+Vue.use(Select)
 Vue.use(Tag)
 Vue.use(Dialog)
 Vue.use(DatePicker)

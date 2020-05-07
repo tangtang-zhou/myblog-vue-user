@@ -25,9 +25,7 @@
             收藏数</span>
         </div>
         <div class="blog-content">
-          Java线程：你想了解的，我都有
-          Java线程的三种创建方式
-          继承Thread对象
+          marked(this.articles[i].content)
         </div>
       </div>
     </el-main>
@@ -36,7 +34,10 @@
 
 <script>
   export default {
-    components: {
+    data () {
+      return {
+        content: ''
+      }
     }
   }
 </script>

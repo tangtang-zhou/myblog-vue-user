@@ -4,24 +4,24 @@
       <el-row :gutter="20" type="flex" justify="center">
         <el-col :span="20"><el-input v-model="blog.title"></el-input></el-col>
         <el-col :span="2"><el-button type="primary" plain :span="5" @click="saveArticle">保存草稿</el-button></el-col>
-        <el-col :span="2"><el-button type="primary" :span="5" @click="dialogFormVisible = true">发布文章</el-button></el-col>
+        <el-col :span="2"><el-button type="primary" :span="5" @click="publishArticle">发布文章</el-button></el-col>
       </el-row>
     </div>
     <el-dialog title="发布文章" :visible.sync="dialogFormVisible" width="35%" :close-on-click-modal="false">
       <el-form>
         <el-form-item label="文章类别：" :label-width="'120px'">
-          <el-tag
-            @close="handleClose(tag)"
-            v-for="tag in tags"
-            :key="tag.name"
-            closable
-            :type="tag.type">
-            {{tag.name}}
-          </el-tag>
+          <el-select v-model="blog.label" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.id"
+              :label="item.label"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="发布形式：" :label-width="'120px'">
-          <el-radio v-model="radio" label="1">公开</el-radio>
-          <el-radio v-model="radio" label="2">私密</el-radio>
+          <el-radio v-model="blog.readType" label="public">公开</el-radio>
+          <el-radio v-model="blog.readType" label="draft">私密</el-radio>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -39,25 +39,15 @@
 </template>
 
 <script>
-
   export default {
     data () {
       return {
         dialogFormVisible: false,
-        tags: [
-          { name: '标签一', type: '' },
-          { name: '标签二', type: 'success' },
-          { name: '标签三', type: 'info' },
-          { name: '标签四', type: 'warning' },
-          { name: '标签五', type: 'danger' }
-        ],
-        blog: { title: '', content: '', user: window.sessionStorage.getItem('userId'), readType: 'draft' }
+        options: [],
+        blog: { title: '', content: '', user: window.sessionStorage.getItem('userId'), readType: '', label: '' }
       }
     },
     methods: {
-      handleClose (tag) {
-        this.tags.splice(this.tags.indexOf(tag), 1)
-      },
       // 所有操作都会被解析重新渲染
       change (value, render) {
         // render 为 markdown 解析后的结果[html]
@@ -65,7 +55,6 @@
       },
       // 提交
       submit () {
-        console.log(this.blogContent)
         console.log(this.html)
       },
       // 绑定@imgAdd event
@@ -93,6 +82,16 @@
         }).then((res) => {
           const _res = res.data
           console.log(_res)
+        })
+      },
+      publishArticle () {
+        this.dialogFormVisible = true
+        this.$http({
+          url: '/api/sort/getAllLabel',
+          method: 'get'
+        }).then((res) => {
+          console.log(res)
+          this.options = res.data
         })
       }
     }
