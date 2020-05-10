@@ -25,7 +25,8 @@
             收藏数</span>
         </div>
         <div class="blog-content">
-          marked(this.articles[i].content)
+          {{this.$route.params.articleId}}
+          {{this.$route.params.userId}}
         </div>
       </div>
     </el-main>
@@ -33,11 +34,25 @@
 </template>
 
 <script>
+  // import marked from 'marked'
+
   export default {
     data () {
       return {
-        content: ''
+        articleId: this.$route.params.articleId * 1,
+        article: []
       }
+    },
+    mounted () {
+      this.$http({
+        url: '/api/article/getArticleById',
+        params: { articleId: this.articleId, userId: this.$route.params.userId * 1 },
+        method: 'get'
+      }).then((res) => {
+        console.log(res)
+        /* this.article = res.data
+        this.articles.content = marked(this.articles.content) */
+      })
     }
   }
 </script>

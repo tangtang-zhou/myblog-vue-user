@@ -5,7 +5,7 @@
         <i class="el-icon-collection-tag"></i>
         {{article.label}}
       </router-link>
-      <h5><router-link to='/detail'>{{article.title}}</router-link></h5>
+      <h5><router-link :to="`/detail/${article.bid}/${article.uid}`">{{article.title}}</router-link></h5>
       <small>
         <router-link to="">
           <i class="el-icon-user-solid"></i>

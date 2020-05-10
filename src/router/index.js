@@ -22,7 +22,7 @@ const routes = [
     component: Main
   },
   {
-    path: '/detail',
+    path: '/detail/:articleId/:userId',
     component: Detail
   },
   {
@@ -34,11 +34,11 @@ const routes = [
     component: Login,
     children: [
       {
-        path: '/userLogin',
+        path: 'userLogin',
         component: LoginC
       },
       {
-        path: '/userRegister',
+        path: 'userRegister',
         component: Register
       },
       {
@@ -52,11 +52,11 @@ const routes = [
     component: Setting,
     children: [
       {
-        path: '/personal',
+        path: 'personal',
         component: Personal
       },
       {
-        path: '/password',
+        path: 'password',
         component: Password
       },
       {
